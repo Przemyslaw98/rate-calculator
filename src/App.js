@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
 export const App = () => {
     const classes = useStyles();
     const [string, setString]=React.useState('');
-    const [error,setError]=React.useState(false);
+    const [error1,setError1]=React.useState(false);
+    const [error2,setError2]=React.useState(false);
+    const [msg1,setMsg1]=React.useState('');
+    const [msg2,setMsg2]=React.useState('');
     const [val1, setVal1] = React.useState('');
     const [val2, setVal2] = React.useState('');
     const [cur1, setCur1] = React.useState(0);
@@ -49,12 +52,20 @@ export const App = () => {
         event.preventDefault();
         switch(event.target.id){
             case "f1":
-                calculate(cur1,cur2,val1,setVal2,setString,setError);
+                errorClear();
+                calculate(cur1,cur2,val1,setVal2,setString,setError1,setMsg1);
                 break;
             case "f2":
-                calculate(cur2,cur1,val2,setVal1,setString,setError);
+                errorClear();
+                calculate(cur2,cur1,val2,setVal1,setString,setError2,setMsg2);
         }
 
+    }
+    function errorClear(){
+        setError1(false);
+        setError2(false);
+        setMsg1('');
+        setMsg2('');
     }
 
 
@@ -64,7 +75,7 @@ export const App = () => {
     return (
         <div className={classes.root}>
             <form id="f1" onSubmit={handleSubmit}>
-                <TextField error={error} id="tf1" value={val1} onChange={handleValueChange} size='large' label="You send" variant="outlined"/>
+                <TextField error={error1} helperText={msg1} id="tf1" value={val1} onChange={handleValueChange} size='large' label="You send" variant="outlined"/>
                 <Select id="cl1" value={cur1} onChange={handleCurrencyChange1} variant="outlined">
                     {list}
                 </Select>
@@ -72,7 +83,7 @@ export const App = () => {
             </form>
             <br/>
             <form id="f2" onSubmit={handleSubmit}>
-                <TextField error={error} id="tf2" value={val2} onChange={handleValueChange} onSubmit={handleSubmit} size='large' label="They receive" variant="outlined"/>
+                <TextField error={error2} helperText={msg2} id="tf2" value={val2} onChange={handleValueChange} onSubmit={handleSubmit} size='large' label="They receive" variant="outlined"/>
                 <Select id="cl2" value={cur2} onChange={handleCurrencyChange2} onSubmit={handleSubmit} variant="outlined">
                     {list}
                 </Select>

@@ -2,11 +2,11 @@ import axios from 'axios';
 import currencyList from "./CurrencyList";
 
 
-async function calculate(c1,c2,v1,setv2,setString,setError){
+async function calculate(c1,c2,v1,setv2,setString,setError,setMsg){
     var error="none";
-    if(isNaN(v1)) {
+    if(isNaN (v1)||v1<0) {
         error = "incorrect value"
-        setv2(error)
+        setMsg(error)
         setError(true)
         return
     }
@@ -15,10 +15,9 @@ async function calculate(c1,c2,v1,setv2,setString,setError){
     if(error==="none") {
         setv2(v1 / r2 * r1);
         setString('1 '+currencyList[c1]+' = '+(r1/r2).toString()+' '+currencyList[c2]);
-        setError(false);
     }
     else {
-        setv2(error);
+        setMsg(error);
         setError(true);
     }
 }
