@@ -24,12 +24,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const App = () => {
     const classes = useStyles();
+    const [string, setString]=React.useState('');
+    const [error,setError]=React.useState(false);
     const [val1, setVal1] = React.useState('');
     const [val2, setVal2] = React.useState('');
     const [cur1, setCur1] = React.useState(0);
     const [cur2, setCur2] = React.useState(0);
     const handleValueChange = (event) => {
-        alert(event.target.id)
         switch(event.target.id){
             case "tf1":
                 setVal1(event.target.value);
@@ -46,14 +47,14 @@ export const App = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-        // alert(event.target.id)
         switch(event.target.id){
             case "f1":
-                setVal2(calculate(cur1,cur2,val1));
+                calculate(cur1,cur2,val1,setVal2,setString,setError);
                 break;
             case "f2":
-                setVal1(calculate(cur2,cur1,val2));
+                calculate(cur2,cur1,val2,setVal1,setString,setError);
         }
+
     }
 
 
@@ -63,7 +64,7 @@ export const App = () => {
     return (
         <div className={classes.root}>
             <form id="f1" onSubmit={handleSubmit}>
-                <TextField id="tf1" value={val1} onChange={handleValueChange} size='large' label="You send" variant="outlined"/>
+                <TextField error={error} id="tf1" value={val1} onChange={handleValueChange} size='large' label="You send" variant="outlined"/>
                 <Select id="cl1" value={cur1} onChange={handleCurrencyChange1} variant="outlined">
                     {list}
                 </Select>
@@ -71,12 +72,13 @@ export const App = () => {
             </form>
             <br/>
             <form id="f2" onSubmit={handleSubmit}>
-                <TextField id="tf2" value={val2} onChange={handleValueChange} onSubmit={handleSubmit} size='large' label="You send" variant="outlined"/>
+                <TextField error={error} id="tf2" value={val2} onChange={handleValueChange} onSubmit={handleSubmit} size='large' label="They receive" variant="outlined"/>
                 <Select id="cl2" value={cur2} onChange={handleCurrencyChange2} onSubmit={handleSubmit} variant="outlined">
                     {list}
                 </Select>
                     <Button color='primary' variant="contained" type="submit">Calculate</Button>
             </form>
+            {string}
 
             {/*<FormControl style={{minWidth: 120}} size='small' className={classes.formControl}>*/}
             {/*    <InputLabel>You send</InputLabel>*/}
