@@ -1,46 +1,31 @@
-import axios from 'axios';
 import currencyList from "./CurrencyList";
+import getRate from "./getRate"
 
-
-async function calculate(c1,c2,v1,setv2,setString,setError,setMsg){
-    var error="none";
-    if(isNaN (v1)||v1<0) {
-        error = "incorrect value"
-        setMsg(error)
-        setError(true)
-        return
-    }
-    const r1=await getRate(currencyList[c1],error);
-    const r2=await getRate(currencyList[c2],error);
-    if(error==="none") {
-        setv2(v1 / r2 * r1);
-        setString('1 '+currencyList[c1]+' = '+(r1/r2).toString()+' '+currencyList[c2]);
-    }
+function calculate(c1,c2,v1,setv1,setv2,setString,rates){
+    v1=parseFloat(v1)
+    if(isNaN (v1)||v1<0)
+        return "incorrect value"
+    setv1(v1)
+    let r1=0;
+    let r2=0;
+    if(rates.has(c1))
+        r1=rates.get(c1)
     else {
-        setMsg(error);
-        setError(true);
+        r1=getRate(currencyList[c1]);
+        if(isNaN(r1))
+            return r1
+        rates.set(c1,r1)
     }
+    if(rates.has(c2))
+        r2=rates.get(c2)
+    else{
+        r2=getRate(currencyList[c2]);
+        if(isNaN(r2))
+            return r2
+        rates.set(c2,r2)
+    }
+    setv2(v1 / r2 * r1);
+    setString('1 '+currencyList[c1]+' = '+(r1/r2).toString()+' '+currencyList[c2]);
 }
-async function getRate(currency,error){
-    if(currency==="PLN")
-        return 1;
-    const url="http://api.nbp.pl/api/exchangerates/rates/a/"+currency+"/?format=json";
-    const res=await axios.get(url)
-    if(res['status']===200){
-        return res['data']['rates'][0]['mid'];
-    }
-    else if(res['status']===200){
-        error="currency not found"
-    }
-    else
-        error="unknown error";
-    return 0
 
-    // }).catch(error=>{
-    //     if(error.response.status===404)
-    //         output="invalid currency";
-    //     else
-    //         output="unknown error";
-    // })
-}
 export default calculate;

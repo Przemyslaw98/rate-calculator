@@ -8,6 +8,6 @@ const currencyList=[
     "MXN","ZAR","BRL",
     "MYR","RUB","IDR",
     "INR","KRW","CNY",
-    "XDR"
+    "XDR","AFN"
 ];
 export default currencyList;

@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+let rates=new Map();
 export const App = () => {
     const classes = useStyles();
     const [string, setString]=React.useState('');
@@ -50,16 +51,24 @@ export const App = () => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
+        var error=null
         switch(event.target.id){
             case "f1":
                 errorClear();
-                calculate(cur1,cur2,val1,setVal2,setString,setError1,setMsg1);
+                error=calculate(cur1,cur2,val1,setVal1,setVal2,setString,rates);
+                if(error!==null) {
+                    setError1(true)
+                    setMsg1(error)
+                }
                 break;
             case "f2":
                 errorClear();
-                calculate(cur2,cur1,val2,setVal1,setString,setError2,setMsg2);
+                error=calculate(cur2,cur1,val2,setVal2,setVal1,setString,rates);
+                if(error!==null) {
+                    setError2(true)
+                    setMsg2(error)
+                }
         }
-
     }
     function errorClear(){
         setError1(false);
