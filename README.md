@@ -4,13 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Starting
 
-In order to start enter the project directory and run command:
+To start the application enter the project directory and run command:
 
 ### `npm start`
 
-Open http://localhost:3000 to view it in the browser.
+Then open http://localhost:3000 to view it in the browser.
 
-To run tests, type:
+If you want to run tests, type:
 
 ### `npm test`
 
