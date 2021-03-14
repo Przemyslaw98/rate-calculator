@@ -18,7 +18,7 @@ If you want to run tests, type:
 
 ![Example](./example.png?raw=true)
 
-Pick a currency from both lists and type a number into either of the two fields using dot as comma.
+Pick a currency from both lists and type a number into either of the two fields using dot as a float separator.
 If all input values are correct, a calculated value will appear automatically in the other text field.
 
 ## About the application
