@@ -4,9 +4,9 @@ import calculate from "./Calculate"
 import checkIfAble from "./checkIfAble";
 import generateString from "./generateString";
 import React from "react";
-import { unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
 import {App} from './App';
+import { shallow, mount } from 'enzyme'
+
 
 describe("checking arguments",()=>{
     test("all good",()=>{
@@ -126,19 +126,3 @@ describe("calculation procedure",()=> {
         expect(output).toBe((v1 * r1 / r2).toFixed(2))
     })
 })
-
-
-// describe("calculation procedure",()=>{
-//     let container = null;
-//     test("IncorrectArgumentLength",()=>{
-//         container=document.createElement("div")
-//         document.body.appendChild(container)
-//
-//         // calculate(c1,c2,v1,setv1,setv2,setString,rates)
-//
-//         unmountComponentAtNode(container);
-//         container.remove();
-//         container = null;
-//     })
-//
-// })
