@@ -4,8 +4,6 @@ import calculate from "./Calculate"
 import checkIfAble from "./checkIfAble";
 import generateString from "./generateString";
 import React from "react";
-import {App} from './App';
-import { shallow, mount } from 'enzyme'
 
 
 describe("checking arguments",()=>{
