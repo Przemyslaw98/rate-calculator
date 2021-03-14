@@ -10,7 +10,7 @@ To start the applicaion enter the project directory and run command:
 
 Then open http://localhost:3000 to view it in the browser.
 
-To run tests, type:
+If you want to run unit tests, type:
 
 ### `npm test`
 
