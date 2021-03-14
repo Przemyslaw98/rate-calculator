@@ -8,7 +8,7 @@ To start the applicaion enter the project directory and run command:
 
 ### `npm start`
 
-Open http://localhost:3000 to view it in the browser.
+Then open http://localhost:3000 to view it in the browser.
 
 To run tests, type:
 
