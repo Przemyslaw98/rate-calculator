@@ -1,5 +1,5 @@
 const tableA=[
-    "AAA","PLN","THB","USD",
+    "PLN","THB","USD",
     "AUD","HKD","CAD",
     "SGD","EUR","HUF",
     "NOK","SEK","HRK",
